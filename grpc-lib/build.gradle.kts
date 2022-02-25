@@ -16,14 +16,22 @@ repositories {
 }
 
 dependencies {
-    implementation("io.grpc:grpc-netty-shaded:${grpcVersion}")
-    implementation("io.grpc:grpc-protobuf:${grpcVersion}")
-    implementation("io.grpc:grpc-stub:${grpcVersion}")
-    implementation("io.grpc:protoc-gen-grpc-java:${grpcVersion}")
-    implementation("io.grpc:grpc-kotlin-stub:${grpcKotlinVersion}")
+    api("io.grpc:grpc-netty-shaded:${grpcVersion}")
+    api("io.grpc:grpc-protobuf:${grpcVersion}")
+    api("io.grpc:grpc-stub:${grpcVersion}")
+    api("io.grpc:protoc-gen-grpc-java:${grpcVersion}")
+    api("io.grpc:grpc-kotlin-stub:${grpcKotlinVersion}")
     if (JavaVersion.current().isJava9Compatible) {
         implementation("jakarta.annotation:jakarta.annotation-api:${jakartaApiVersion}")
     }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs = listOf("-Xjsr305=strict", "-Xjvm-default=all-compatibility")
+        jvmTarget = "11"
+    }
+    dependsOn("generateProto")
 }
 
 protobuf {
