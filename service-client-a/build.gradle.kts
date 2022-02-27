@@ -9,13 +9,13 @@ val grpcKotlinVersion: String by project
 val netDevhGrpcStarterVersion: String by project
 
 plugins {
-    id("org.springframework.boot").version("2.3.0.RELEASE")
-    id("io.spring.dependency-management").version("1.0.9.RELEASE")
-    id("com.google.protobuf").version("0.8.18")
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+    id("com.google.protobuf")
     java
     idea
-    kotlin("jvm").version("1.5.0")
-    kotlin("plugin.spring").version("1.5.0")
+    kotlin("jvm")
+    kotlin("plugin.spring")
 }
 
 repositories {
@@ -33,7 +33,7 @@ dependencies {
     implementation("io.grpc:grpc-stub:${grpcVersion}")
     implementation("io.grpc:protoc-gen-grpc-java:${grpcVersion}")
     implementation("io.grpc:grpc-kotlin-stub:${grpcKotlinVersion}")
-    implementation("net.devh:grpc-server-spring-boot-starter:${netDevhGrpcStarterVersion}")
+    implementation("net.devh:grpc-client-spring-boot-starter:${netDevhGrpcStarterVersion}")
 }
 
 tasks.withType<KotlinCompile> {
